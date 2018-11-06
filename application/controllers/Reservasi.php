@@ -2,44 +2,52 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Tipekamar extends CI_Controller {
+class Reservasi extends CI_Controller {
 
-    function insert_tipe_kamar() {
+    function insert_reservasi() {
         $id = $this->input->post('id');
-        $nama = $this->input->post('nama');
-        $fasilitas = $this->input->post('fasilitas');
-        $ukuran = $this->input->post('ukuran');
+        $id_user = $this->input->post('id_user');
+        $id_hotel = $this->input->post('id_hotel');
+        $id_tipe_kamar = $this->input->post('id_tipe_kamar');
+        $durasi = $this->input->post('durasi');
+        $cek_in = $this->input->post('cek_in');
+        $cek_out = $this->input->post('cek_out');
         $harga = $this->input->post('harga');
+        $keterangan = $this->input->post('keterangan');
 
-        $this->db->query("INSERT INTO m_tipe_kamar(nama,fasilitas,ukuran,harga) VALUES ('$nama','$fasilitas','$ukuran','$harga')");
+        $this->db->query("INSERT INTO m_reservasi(id_user,id_hotel,id_tipe_kamar,durasi,cek_in,cek_out,harga,keterangan) VALUES ('$id_user','$id_hotel','$id_tipe_kamar','$durasi','$cek_in','$cek_out','$harga','$keterangan')");
 
         if ($this->db->trans_status() === FALSE) {
-            echo 'Anda gagal simpan Tipe Kamar';
+            echo 'Anda gagal simpan Reservasi';
         } else {
-            echo 'Anda berhasil simpan Tipe Kamar';
+            echo 'Anda berhasil simpan Reservasi';
         }
     }
     
-    function update_tipe_kamar() {
+    function update_reservasi() {
         $id = $this->input->post('id');
-        $nama = $this->input->post('nama');
-        $fasilitas = $this->input->post('fasilitas');
-        $ukuran = $this->input->post('ukuran');
+        $id_user = $this->input->post('id_user');
+        $id_hotel = $this->input->post('id_hotel');
+        $id_tipe_kamar = $this->input->post('id_tipe_kamar');
+        $durasi = $this->input->post('durasi');
+        $cek_in = $this->input->post('cek_in');
+        $cek_out = $this->input->post('cek_out');
         $harga = $this->input->post('harga');
+        $keterangan = $this->input->post('keterangan');
 
-        $this->db->query("UPDATE m_tipe_kamar SET nama='$nama',fasilitas='$fasilitas',ukuran='$ukuran',harga='$harga' WHERE id='$id'");
+        $this->db->query("UPDATE m_reservasi SET id_user='$id_user',di_hotel='$id_hotel',id_tipe_kamar='$id_tipe_kamar',durasi='$durasi',cek_in='$cek_in',cek_out='$cek_out',harga='$harga',keterangan='$keterangan' WHERE id='$id'");
 
         if ($this->db->trans_status() === FALSE) {
-            echo 'Anda gagal mengganti tipe_kamar';
+            echo 'Anda gagal mengganti reservasi';
         } else {
-            echo 'Anda berhasil mengganti tipe_kamar';
+            echo 'Anda berhasil mengganti reservasi';
         }
     }
     
-    function delete_tipe_kamar() {
+    function delete_reservasi() {
         $id = $this->input->post('id');
 
-        $this->db->query("DELETE FROM m_tipe_kamar WHERE id=$id");
+        $this->db->query("DELETE FROM m_reservasi WHERE id=$id");
 
         if ($this->db->trans_status() === FALSE) {
             echo 'Anda gagal menghapus profil';
@@ -47,8 +55,8 @@ class Tipekamar extends CI_Controller {
             echo 'Anda berhasil menghapus profil';
         }
     }
-   function data_tipe_kamar() {
-        $query = $this->db->query("SELECT * FROM m_tipe_kamar");
+   function data_reservasi() {
+        $query = $this->db->query("SELECT * FROM m_reservasi");
         $json = $query->result();
         echo json_encode($json);
     }
